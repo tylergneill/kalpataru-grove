@@ -46,6 +46,20 @@ body {
     flex-shrink: 0;
 }
 
+.content-column--wide {
+    max-width: 1200px;
+}
+
+.img-container {
+    text-align: center;
+}
+
+.img-container img {
+    margin-top: -2rem;
+    max-width: 90%;
+    height: auto;
+}
+
 /* ---- Headings ---- */
 
 .top-banner h1 {
@@ -67,6 +81,8 @@ h1 {
     height: auto; /* Maintain aspect ratio */
     display: block; /* Ensure no extra space below */
 }
+
+
 
 
 /* ---- Text ---- */
