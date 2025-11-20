@@ -9,20 +9,35 @@
     <link rel="stylesheet" href="/static/web/style.css">
 </head>
 <body>
-    <h1>Kalpataru Grove</h1>
-    <p>
-        An integrated ecosystem of digital Sanskrit projects.
-        <ul>
-            <li><a href="https://hansel-library.info">HANSEL</a> is a home where new Sanskrit texts live</li>
-            <li><a href="https://skrutable.info">Skrutable</a> helps with common text processing tasks, including OCR</li>
-            <li><a href="https://panditya.info/seti">SETI</a> provides an overview of available textual resources</li>
-            <li><a href="https://panditya.info">Pāṇḍitya</a> visually presents networks of Sanskrit authors, their works, and e-texts online</li>
-            <li><a href="https://vatayana.info">Vātāyana</a> reveals intertextual relationships inside and across texts</li>
-        </ul>
-        Finally, creator <a href="https://tylerneill.info">Tyler</a> serves as curator, helping the grove to flourish and benefit visitors.
-    </p>
-    <p>
-        Anyone can view Kalpataru Grove web-app traffic and status with <a href="{{ firewatch_url }}">Firewatch</a> (u: kalpataru, p: grove).
-    </p>
+    <div class="main-container">
+        <div class="content-column">
+            <div class="top-banner">
+                <h1>Kalpataru Grove</h1>
+            </div>
+            <p>
+                An integrated ecosystem of projects for enriching Sanskrit text data online.
+            </p>
+            <ul>
+                <li><a href="https://hansel-library.info">HANSEL</a> is a home where new Sanskrit texts live.</li>
+                <li><a href="https://skrutable.info">Skrutable</a> helps with common text processing tasks, including OCR.</li>
+                <li><a href="https://panditya.info/seti">SETI</a> provides an overview of available textual resources.</li>
+                <li><a href="https://panditya.info">Pāṇḍitya</a> visualizes networks of authors, works, and online e-texts.</li>
+                <li><a href="https://vatayana.info">Vātāyana</a> reveals intertextual relationships inside and across texts.</li>
+            </ul>
+            <p style="text-align: center;"">
+                <a href="system_diagram.html">System Diagram</a>
+            </p>
+            <p>
+                Management:
+            </p>
+            <ul>
+                <li>Creator <a href="https://tylerneill.info">Tyler</a> serves as curator, helping the grove to flourish and benefit visitors.</li>
+                <li><a href="{{ firewatch_url }}">Firewatch</a> (u: kalpataru, p: grove) helps monitor activity for these web apps.</li>
+            </ul>
+        </div>
+        <div class="logo-column">
+            <img src="/static/web/kalpataru_logo_original.png" alt="Kalpataru Grove Logo" class="main-logo">
+        </div>
+    </div>
 </body>
 </html>
