@@ -168,3 +168,11 @@ a:hover {
         margin-bottom: 1.5rem;
     }
 }
+
+.version {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 0.8em;
+    color: #888;
+}
