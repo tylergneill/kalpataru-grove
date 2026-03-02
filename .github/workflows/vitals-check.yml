@@ -2,7 +2,7 @@ name: Vitals Check
 
 on:
   schedule:
-    - cron: '0 14,2 * * *'  # 9am and 9pm EST (14:00 and 02:00 UTC)
+    - cron: '0 13,1 * * *'  # 8am and 8pm EST (13:00 and 01:00 UTC)
   workflow_dispatch:       # allow manual trigger
 
 jobs:
