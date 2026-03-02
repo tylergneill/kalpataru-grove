@@ -1,0 +1,32 @@
+name: Vitals Check
+
+on:
+  schedule:
+    - cron: '0 14,2 * * *'  # 9am and 9pm EST (14:00 and 02:00 UTC)
+  workflow_dispatch:       # allow manual trigger
+
+jobs:
+  check-sites:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check all sites return 200
+        run: |
+          sites=(
+            "https://skrutable.info"
+            "https://vatayana.info"
+            "https://panditya.info"
+            "https://hansel.info"
+            "https://kalpataru-grove.info"
+          )
+
+          failed=0
+          for site in "${sites[@]}"; do
+            status=$(curl -o /dev/null -s -w "%{http_code}" --max-time 30 -L "$site")
+            echo "$site → $status"
+            if [ "$status" -ne 200 ]; then
+              echo "::error::$site returned HTTP $status"
+              failed=1
+            fi
+          done
+
+          exit $failed
