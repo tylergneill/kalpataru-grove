@@ -170,6 +170,33 @@ a:hover {
     }
 }
 
+.kofi-container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.kofi-link {
+    display: block;
+    margin-top: 8px;
+    overflow: hidden;
+    height: 72px;
+}
+
+.kofi-scaler {
+    width: 500px;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+    .kofi-container {
+        width: 90%;
+    }
+
+    .kofi-scaler {
+        width: 500px;
+    }
+}
+
 .version {
     position: fixed;
     bottom: 10px;
