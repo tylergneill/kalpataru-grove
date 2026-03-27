@@ -41,6 +41,36 @@
             <img src="/static/web/kalpataru_logo_original.png" alt="Kalpataru Grove Logo" class="main-logo">
         </div>
     </div>
+    <div style="padding: 48px 0 0 0;">
+        <div class="kofi-container" style="border-top:1px solid #b0c9e0;"></div>
+        <div class="kofi-container">
+            <p style="margin-top:8px;margin-bottom:8px;text-align:center;">Help secure Kalpataru Grove as a true community resource.</p>
+            <a href='https://ko-fi.com/kalpataru_grove/goal?g=0' target='_blank' class='kofi-link'>
+                <div class='kofi-scaler'>
+                    <iframe src='https://ko-fi.com/streamalerts/goaloverlay/sa_3ce0ab8d-d728-4789-96d5-989e45848a79?color=1F5172' style='border:none;width:500px;height:80px;display:block;pointer-events:none;'></iframe>
+                </div>
+            </a>
+        </div>
+    </div>
     <div class="version">{{ app_version }}</div>
+    <script>
+        function scaleKofi() {
+            var scaler = document.querySelector('.kofi-scaler');
+            if (!scaler) return;
+            var container = scaler.closest('.kofi-container');
+            var scale = container.offsetWidth / 500;
+            if (scale < 1) {
+                var offset = (container.offsetWidth - 500 * scale) / 2;
+                scaler.style.transform = 'translateX(' + offset + 'px) scale(' + scale + ')';
+                scaler.style.transformOrigin = 'top left';
+                scaler.closest('.kofi-link').style.height = Math.round(72 * scale) + 'px';
+            } else {
+                scaler.style.transform = '';
+                scaler.closest('.kofi-link').style.height = '72px';
+            }
+        }
+        scaleKofi();
+        window.addEventListener('resize', scaleKofi);
+    </script>
 </body>
 </html>

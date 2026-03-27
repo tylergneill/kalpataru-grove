@@ -19,3 +19,6 @@ run-official:
 	  -it \
 	  -p 5080:5080 \
 	  tylergneill/kalpataru-grove-app:$(VERSION)
+
+ngrok:
+	ngrok http 5081

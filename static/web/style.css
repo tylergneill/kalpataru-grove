@@ -39,11 +39,11 @@ body {
 .logo-column {
     position: sticky;
     top: 2rem;
-    display: flex; /* Make logo-column a flex container */
-    align-items: flex-start; /* Align image to top */
-    justify-content: center; /* Center image horizontally */
-    flex-grow: 0;
-    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .content-column--wide {
@@ -77,9 +77,10 @@ h1 {
 }
 
 .main-logo {
-    max-width: 600px; /* Control logo width directly */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Ensure no extra space below */
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    display: block;
 }
 
 
@@ -166,6 +167,33 @@ a:hover {
     .top-banner {
         padding: 1rem 0;
         margin-bottom: 1.5rem;
+    }
+}
+
+.kofi-container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.kofi-link {
+    display: block;
+    margin-top: 8px;
+    overflow: hidden;
+    height: 72px;
+}
+
+.kofi-scaler {
+    width: 500px;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+    .kofi-container {
+        width: 90%;
+    }
+
+    .kofi-scaler {
+        width: 500px;
     }
 }
 
