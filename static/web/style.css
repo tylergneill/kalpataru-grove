@@ -39,11 +39,11 @@ body {
 .logo-column {
     position: sticky;
     top: 2rem;
-    display: flex; /* Make logo-column a flex container */
-    align-items: flex-start; /* Align image to top */
-    justify-content: center; /* Center image horizontally */
-    flex-grow: 0;
-    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .content-column--wide {
@@ -77,9 +77,10 @@ h1 {
 }
 
 .main-logo {
-    max-width: 600px; /* Control logo width directly */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Ensure no extra space below */
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    display: block;
 }
 
 
