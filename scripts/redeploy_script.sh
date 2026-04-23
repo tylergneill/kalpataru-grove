@@ -60,7 +60,12 @@ case "$APP" in
       )
       ;;
   vatayana)
-      RUN_OPTS+=(--network sktnet -e DB_SERVER=mongo)
+      TS_KEYS_FILE="/home/tyler/turnstile_keys/vatayana${SUFFIX}"
+      TS_SITE_KEY=$(sed -n '1p' "$TS_KEYS_FILE")
+      TS_SECRET_KEY=$(sed -n '2p' "$TS_KEYS_FILE")
+      RUN_OPTS+=(--network sktnet -e DB_SERVER=mongo
+        -e TURNSTILE_SITE_KEY="$TS_SITE_KEY"
+        -e TURNSTILE_SECRET_KEY="$TS_SECRET_KEY")
       ;;
   panditya)
       RUN_OPTS+=(

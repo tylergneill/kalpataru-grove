@@ -13,9 +13,9 @@ This section documents the full workflow for building and deploying Kalpataru Gr
 1. Clone this repo: `git clone https://github.com/tylergneill/kalpataru-grove`
 2. Add to `~/.zshrc` or `~/.bashrc`:
    ```bash
-   source /path/to/kalpataru-grove/build_script.sh
+   source /path/to/kalpataru-grove/scripts/build_script.sh
    ```
-3. Adjust any paths in `build_script.sh` as needed for your machine.
+3. Adjust any paths in `scripts/build_script.sh` as needed for your machine.
 
 To build and push a Docker image, export the required env vars and run:
 ```bash
@@ -28,11 +28,11 @@ build_and_push --stg   # targets Dockerfile.stg (staging)
 ### Remote server
 
 1. Clone this repo: `git clone https://github.com/tylergneill/kalpataru-grove`
-2. Adjust any paths in `redeploy_script.sh` as needed for the server.
-3. Update the path in `redeploy_script_wrapper.sh` to match where the repo is cloned.
+2. Adjust any paths in `scripts/redeploy_script.sh` as needed for the server.
+3. Update the path in `scripts/redeploy_script_wrapper.sh` to match where the repo is cloned.
 4. Add to `~/.bashrc`:
    ```bash
-   source /path/to/kalpataru-grove/redeploy_script_wrapper.sh
+   source /path/to/kalpataru-grove/scripts/redeploy_script_wrapper.sh
    ```
 
 To redeploy a container:
