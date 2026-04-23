@@ -1,29 +1,32 @@
-#!/usr/bin/env bash
 # redeploy.sh  —  one-stop container (re)deployer
 # Bash ≥4 required for associative arrays.
+# Source this file in ~/.bashrc or ~/.zshrc to get the `redeploy` command.
+# Update the path below to match where kalpataru-grove is cloned on this machine.
+#   source /path/to/kalpataru-grove/scripts/redeploy.sh
 
-set -euo pipefail
+redeploy() {
 
 ########################################
 # 1. CLI parsing
 ########################################
-APP="${1:-}"
-VER="${2:-}"
-RAW_SUFFIX="${3:-}"          # "" | --stg | -stg | -stg-custom
+local APP="${1:-}"
+local VER="${2:-}"
+local RAW_SUFFIX="${3:-}"          # "" | --stg | -stg | -stg-custom
 
 if [[ -z "$APP" || -z "$VER" ]]; then
-  echo "Usage: $0 <app_name> <version> [--stg | -stg | -stg-xxx]" >&2
-  exit 64
+  echo "Usage: redeploy <app_name> <version> [--stg | -stg | -stg-xxx]" >&2
+  return 64
 fi
 
+local SUFFIX
 case "$RAW_SUFFIX" in
   ""    ) SUFFIX="";;
   --stg ) SUFFIX="-stg";;
   -*    ) SUFFIX="$RAW_SUFFIX";;
-  *     ) echo "Bad suffix $RAW_SUFFIX  (must start with ‘-’)" >&2; exit 64;;
+  *     ) echo "Bad suffix $RAW_SUFFIX  (must start with '-')" >&2; return 64;;
 esac
 
-CONTAINER="${APP}${SUFFIX}"
+local CONTAINER="${APP}${SUFFIX}"
 
 ########################################
 # 2. Port lookup
@@ -40,17 +43,17 @@ declare -A PORT_MAP=(
   [panditya]=5090               [panditya-stg]=5091
 )
 
-PORT="${PORT_MAP[$CONTAINER]:-}"
+local PORT="${PORT_MAP[$CONTAINER]:-}"
 if [[ -z "$PORT" ]]; then
   echo "Unknown app / stage combo: $CONTAINER" >&2
-  exit 65
+  return 65
 fi
 
 ########################################
 # 3. Image name & per-app run flags
 ########################################
-IMAGE="tylergneill/${APP}-app"     # default
-RUN_OPTS=(--restart unless-stopped)
+local IMAGE="tylergneill/${APP}-app"
+local RUN_OPTS=(--restart unless-stopped)
 
 case "$APP" in
   skrutable)
@@ -60,7 +63,9 @@ case "$APP" in
       )
       ;;
   vatayana)
-      TS_KEYS_FILE="/home/tyler/turnstile_keys/vatayana${SUFFIX}"
+      local TS_KEYS_FILE="/home/tyler/turnstile_keys/vatayana${SUFFIX}"
+      local TS_SITE_KEY
+      local TS_SECRET_KEY
       TS_SITE_KEY=$(sed -n '1p' "$TS_KEYS_FILE")
       TS_SECRET_KEY=$(sed -n '2p' "$TS_KEYS_FILE")
       RUN_OPTS+=(--network sktnet -e DB_SERVER=mongo
@@ -91,7 +96,7 @@ esac
 echo "➤ Pulling ${IMAGE}:${VER}"
 docker pull "${IMAGE}:${VER}"
 
-echo "➤ Stopping/removing old container (ignore ‘No such …’ warnings)"
+echo "➤ Stopping/removing old container (ignore 'No such …' warnings)"
 docker stop  "$CONTAINER" 2>/dev/null || true
 docker rm    "$CONTAINER" 2>/dev/null || true
 
@@ -110,3 +115,5 @@ docker run --name "$CONTAINER" -d \
 echo "✓  Deployed ${CONTAINER}.  Tailing logs …"
 sleep 1
 docker logs -f "$CONTAINER"
+
+}
