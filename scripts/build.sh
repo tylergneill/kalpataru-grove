@@ -6,6 +6,10 @@ build_and_push() {
                 DOCKERFILE="Dockerfile.stg"
                 shift
                 ;;
+            --dev)
+                DOCKERFILE="Dockerfile.dev"
+                shift
+                ;;
             *)
                 echo "Unknown argument: $1"
                 return 1

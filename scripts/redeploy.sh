@@ -14,7 +14,7 @@ local VER="${2:-}"
 local RAW_SUFFIX="${3:-}"          # "" | --stg | -stg | -stg-custom
 
 if [[ -z "$APP" || -z "$VER" ]]; then
-  echo "Usage: redeploy <app_name> <version> [--stg | -stg | -stg-xxx]" >&2
+  echo "Usage: redeploy <app_name> <version> [--stg | -stg | --dev | -dev | -xxx]" >&2
   return 64
 fi
 
@@ -22,6 +22,7 @@ local SUFFIX
 case "$RAW_SUFFIX" in
   ""    ) SUFFIX="";;
   --stg ) SUFFIX="-stg";;
+  --dev ) SUFFIX="-dev";;
   -*    ) SUFFIX="$RAW_SUFFIX";;
   *     ) echo "Bad suffix $RAW_SUFFIX  (must start with '-')" >&2; return 64;;
 esac
@@ -32,15 +33,13 @@ local CONTAINER="${APP}${SUFFIX}"
 # 2. Port lookup
 ########################################
 declare -A PORT_MAP=(
-  [skrutable]=5010              [skrutable-stg]=5012
-  [skrutable-stg-1-7-dominik]=5011
-  [vatayana]=5020               [vatayana-stg]=5021
-  [hansel]=5030                 [hansel-stg]=5031
-  [brucheion-nbhu]=5040
-  [splitter-server]=5060
-  [firewatch]=5070              [firewatch-stg]=5071
-  [kalpataru-grove]=5080        [kalpataru-grove-stg]=5081
-  [panditya]=5090               [panditya-stg]=5091
+  [skrutable]=5010              [skrutable-stg]=5011   [skrutable-dev]=5012
+  [splitter-server]=5020
+  [vatayana]=5030               [vatayana-stg]=5031    [vatayana-dev]=5032
+  [panditya]=5040               [panditya-stg]=5041    [panditya-dev]=5042
+  [hansel]=5050                 [hansel-stg]=5051      [hansel-dev]=5052
+  [kalpataru-grove]=5060        [kalpataru-grove-stg]=5061   [kalpataru-grove-dev]=5062
+  [firewatch]=5070              [firewatch-stg]=5071   [firewatch-dev]=5072
 )
 
 local PORT="${PORT_MAP[$CONTAINER]:-}"
