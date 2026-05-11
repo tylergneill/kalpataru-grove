@@ -60,6 +60,7 @@ case "$APP" in
         -v /home/tyler/cred/gcp_uploader.json:/app/assets/uploader.json:ro
         -e GOOGLE_APPLICATION_CREDENTIALS=/app/assets/uploader.json
       )
+      [[ "$SUFFIX" == "-dev" ]] && RUN_OPTS+=(-e SKRUTABLE_DEBUG_TIMING=1)
       ;;
   vatayana)
       local TS_KEYS_FILE="/home/tyler/turnstile_keys/vatayana${SUFFIX}"
