@@ -45,6 +45,7 @@ To redeploy a container:
 ```bash
 redeploy <app_name> <version> [--stg]
 redeploy <app_name> --redirect   # deploy the staging-offline redirect page in place of stg
+redeploy <app_name> redirect     # equivalent shorthand — either form works
 ```
 
 Where available, redirect and stg share the same port, so `redeploy` stops whichever of the two is currently running before starting the other.

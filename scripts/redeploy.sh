@@ -13,15 +13,15 @@ local APP="${1:-}"
 local VER="${2:-}"
 local RAW_SUFFIX="${3:-}"          # "" | --stg | -stg | -stg-custom | --redirect
 
-# Allow: redeploy <app> --redirect  (no explicit version)
-if [[ "$VER" == "--redirect" && -z "$RAW_SUFFIX" ]]; then
+# Allow: redeploy <app> --redirect  OR  redeploy <app> redirect  (no explicit version either way)
+if [[ ( "$VER" == "--redirect" || "$VER" == "redirect" ) && -z "$RAW_SUFFIX" ]]; then
   RAW_SUFFIX="--redirect"
   VER="redirect"
 fi
 
 if [[ -z "$APP" || -z "$VER" ]]; then
   echo "Usage: redeploy <app_name> <version> [--stg | -stg | --dev | -dev | -xxx | --redirect]" >&2
-  echo "       redeploy <app_name> --redirect" >&2
+  echo "       redeploy <app_name> --redirect   (or: redeploy <app_name> redirect)" >&2
   return 64
 fi
 
