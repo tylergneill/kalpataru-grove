@@ -38,4 +38,7 @@ build_and_push --redirect   # targets Dockerfile.redirect (staging-offline redir
 To redeploy a container:
 ```bash
 redeploy <app_name> <version> [--stg]
+redeploy <app_name> --redirect   # deploy the staging-offline redirect page in place of stg
 ```
+
+Where available, redirect and stg share the same port, so `redeploy` stops whichever of the two is currently running before starting the other.
