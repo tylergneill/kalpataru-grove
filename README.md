@@ -23,6 +23,12 @@ export APP_NAME=my-app
 export VERSION=1.2.3
 build_and_push              # targets Dockerfile (production)
 build_and_push --stg        # targets Dockerfile.stg (staging)
+```
+
+The redirect image is versionless — `redeploy <app_name> --redirect` always pulls the `:redirect` tag — so build/push it with `VERSION=redirect`:
+```bash
+export APP_NAME=my-app
+export VERSION=redirect
 build_and_push --redirect   # targets Dockerfile.redirect (staging-offline redirect page)
 ```
 
