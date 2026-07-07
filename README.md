@@ -2,7 +2,7 @@
 
 Website for the Kalpataru Grove ecosystem of digital Sanskrit projects.
 
-This repo also serves as the source of truth for the build and deployment scripts used across local machines and the remote server. This has been done to increase transparency into how the Kalpataru Grove server is managed, so that others may learn from it. 
+This repo also serves as the source of truth for the build and deployment scripts used across local machines and the remote server. This has been done partly for efficiency, and partly to increase transparency into how the Kalpataru Grove server is managed, so that others may learn from it. 
 
 ## Build and Deployment Process
 
