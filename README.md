@@ -21,8 +21,9 @@ To build and push a Docker image, export the required env vars and run:
 ```bash
 export APP_NAME=my-app
 export VERSION=1.2.3
-build_and_push         # targets Dockerfile (production)
-build_and_push --stg   # targets Dockerfile.stg (staging)
+build_and_push              # targets Dockerfile (production)
+build_and_push --stg        # targets Dockerfile.stg (staging)
+build_and_push --redirect   # targets Dockerfile.redirect (staging-offline redirect page)
 ```
 
 ### Remote server
