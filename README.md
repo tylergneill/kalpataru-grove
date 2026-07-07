@@ -2,7 +2,7 @@
 
 Website for the Kalpataru Grove ecosystem of digital Sanskrit projects.
 
-This repo also serves as the source of truth for the build and deployment scripts used across local machines and the remote server. This has been done to increase transparency into how the Kalpataru Grove server is managed, so that others may learn from it. 
+This repo also serves as the source of truth for the build and deployment scripts used across local machines and the remote server. This has been done partly for efficiency, and partly to increase transparency into how the Kalpataru Grove server is managed, so that others may learn from it. 
 
 ## Build and Deployment Process
 
@@ -21,8 +21,15 @@ To build and push a Docker image, export the required env vars and run:
 ```bash
 export APP_NAME=my-app
 export VERSION=1.2.3
-build_and_push         # targets Dockerfile (production)
-build_and_push --stg   # targets Dockerfile.stg (staging)
+build_and_push              # targets Dockerfile (production)
+build_and_push --stg        # targets Dockerfile.stg (staging)
+```
+
+The redirect image is versionless — `redeploy <app_name> --redirect` always pulls the `:redirect` tag — so build/push it with `VERSION=redirect`:
+```bash
+export APP_NAME=my-app
+export VERSION=redirect
+build_and_push --redirect   # targets Dockerfile.redirect (staging-offline redirect page)
 ```
 
 ### Remote server
@@ -37,4 +44,8 @@ build_and_push --stg   # targets Dockerfile.stg (staging)
 To redeploy a container:
 ```bash
 redeploy <app_name> <version> [--stg]
+redeploy <app_name> --redirect   # deploy the staging-offline redirect page in place of stg
+redeploy <app_name> redirect     # equivalent shorthand — either form works
 ```
+
+Where available, redirect and stg share the same port, so `redeploy` stops whichever of the two is currently running before starting the other.

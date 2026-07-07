@@ -10,6 +10,10 @@ build_and_push() {
                 DOCKERFILE="Dockerfile.dev"
                 shift
                 ;;
+            --redirect)
+                DOCKERFILE="Dockerfile.redirect"
+                shift
+                ;;
             *)
                 echo "Unknown argument: $1"
                 return 1
