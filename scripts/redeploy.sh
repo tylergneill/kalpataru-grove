@@ -37,6 +37,16 @@ esac
 
 local CONTAINER="${APP}${SUFFIX}"
 
+# Guard against accidentally running a -dev#/-rc# tagged image as prod
+if [[ -z "$SUFFIX" && "$VER" =~ -(dev|rc)[0-9]*$ ]]; then
+  local CONFIRM
+  read -r -p "⚠️  '${VER}' looks like a non-prod build, but no --stg/--dev flag was given — deploy as PROD anyway? [y/N] " CONFIRM
+  case "$CONFIRM" in
+    [yY]|[yY][eE][sS]) ;;
+    *) echo "Aborted." >&2; return 1;;
+  esac
+fi
+
 ########################################
 # 2. Port lookup
 ########################################
