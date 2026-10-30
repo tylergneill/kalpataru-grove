@@ -3,22 +3,20 @@ LOCAL_DATA_PATH = $(shell realpath $(dir $(lastword $(MAKEFILE_LIST)))../kalpata
 
 # for temporary local builds with full data
 run:
-	docker build . -f Dockerfile.stg -t kalpataru-grove-dev:debug
+	docker build . -f Dockerfile.dev -t kalpataru-grove-dev:debug
 	docker run \
 	  --rm \
 	  -it \
-	  -p 5081:5081 \
+	  -p 5062:5062 \
 	  --name kalpataru-grove-dev \
 	  kalpataru-grove-dev:debug
 
 # for official stg and prod builds uploaded to Docker Hub
 # to use: VERSION={version} make run-official
+# (host side is 5062 because browsers block 5060/5061 as SIP ports)
 run-official:
 	docker run \
 	  --rm \
 	  -it \
-	  -p 5080:5080 \
+	  -p 5062:5060 \
 	  tylergneill/kalpataru-grove-app:$(VERSION)
-
-ngrok:
-	ngrok http 5081
