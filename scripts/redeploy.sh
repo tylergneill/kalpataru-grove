@@ -99,6 +99,8 @@ if [[ "$SUFFIX" != "-redirect" ]]; then
     skrutable)
         RUN_OPTS+=(
           -v /home/tyler/cred/gcp_uploader.json:/app/assets/uploader.json:ro
+          # WSC talk videos live on the host, not in the image or git
+          -v /home/tyler/video/wsc2022:/app/assets/wsc2022:ro
           -e GOOGLE_APPLICATION_CREDENTIALS=/app/assets/uploader.json
         )
         [[ "$SUFFIX" == "-dev" ]] && RUN_OPTS+=(-e SKRUTABLE_DEBUG_TIMING=1)
